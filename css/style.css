@@ -1,0 +1,540 @@
+/* 전역 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 포인트 카운터 (고정) */
+.points-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: slideInRight 0.5s ease;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    color: #667eea;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+/* 인트로 화면 */
+.intro-screen {
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+.intro-screen h1 {
+    font-size: 48px;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.intro-screen p {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+
+.intro-screen .emoji {
+    font-size: 120px;
+    margin-bottom: 30px;
+    animation: bounce 2s infinite;
+}
+
+/* 알 선택 화면 */
+.egg-select-screen {
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.egg-select-screen h2 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.eggs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.egg-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.egg-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.egg-card.fire::before {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.egg-card.aqua::before {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.egg-card.thunder::before {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.egg-card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.egg-card.selected {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.egg-card.selected::before {
+    opacity: 0.2;
+}
+
+.egg-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.egg-emoji {
+    font-size: 80px;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.egg-card.fire .egg-emoji {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.egg-card.aqua .egg-emoji {
+    animation: float 3s ease-in-out infinite;
+}
+
+.egg-card.thunder .egg-emoji {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+.egg-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.egg-card p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 성장 미션 화면 */
+.growth-screen {
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+    width: 100%;
+    max-width: 600px;
+}
+
+.progress-bar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.car-character {
+    font-size: 120px;
+    margin-bottom: 30px;
+    animation: bounce 2s infinite;
+}
+
+.question-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+.question-card h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 결과 화면 */
+.result-screen {
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+    width: 100%;
+    max-width: 600px;
+}
+
+.result-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.result-card h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.car-display {
+    font-size: 120px;
+    margin-bottom: 30px;
+    animation: zoomIn 0.5s ease;
+}
+
+.vehicle-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.vehicle-info h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.vehicle-info p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.traits-section {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.traits-section h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.trait-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.trait-icon {
+    font-size: 24px;
+}
+
+.rewards-section {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.rewards-section h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.points-display {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.discount-info {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.code-section {
+    border: 3px dashed #ddd;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background: #f9f9f9;
+}
+
+.code-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.code-value {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #333;
+    letter-spacing: 2px;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .intro-screen h1 {
+        font-size: 32px;
+    }
+
+    .intro-screen p {
+        font-size: 18px;
+    }
+
+    .egg-select-screen h2 {
+        font-size: 28px;
+    }
+
+    .eggs-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .question-card {
+        padding: 25px;
+    }
+
+    .question-card h2 {
+        font-size: 22px;
+    }
+
+    .result-card {
+        padding: 25px;
+    }
+
+    .result-card h1 {
+        font-size: 28px;
+    }
+
+    .vehicle-info h2 {
+        font-size: 26px;
+    }
+
+    .points-counter {
+        top: 10px;
+        right: 10px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
