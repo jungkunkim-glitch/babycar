@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .status {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .ok {
+            background: #4CAF50;
+            color: white;
+        }
+        .error {
+            background: #f44336;
+            color: white;
+        }
+        button {
+            background: linear-gradient(135deg, #FFB347 0%, #FF6B9D 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 CBTI 게임 테스트</h1>
+        <p>이 페이지가 보이면 서버는 정상입니다!</p>
+
+        <div id="checks">
+            <div class="status ok">✓ HTML 로딩 성공</div>
+            <div class="status ok">✓ CSS 적용 성공</div>
+            <div class="status ok" id="js-check">✓ JavaScript 실행 성공</div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="location.href='/'">
+                메인 게임으로 →
+            </button>
+            <button onclick="location.href='/debug.html'">
+                디버그 페이지 →
+            </button>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 14px; color: #666;">
+            <p>현재 URL: <code id="current-url"></code></p>
+            <p>서버 시간: <span id="time"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript 테스트
+        document.getElementById('js-check').style.background = '#4CAF50';
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('time').textContent = new Date().toLocaleString('ko-KR');
+
+        // 1초마다 시간 업데이트
+        setInterval(() => {
+            document.getElementById('time').textContent = new Date().toLocaleString('ko-KR');
+        }, 1000);
+
+        console.log('✓ 테스트 페이지 로드 완료');
+        console.log('현재 URL:', window.location.href);
+    </script>
+</body>
+</html>
